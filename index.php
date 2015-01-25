@@ -1,99 +1,96 @@
 <?php 
-    ob_start();
-    session_start();
-    mysql_connect("localhost","root","");
-    mysql_select_db("juitieee_ppp");
- ?>
+include('./inchead.php')
+?>
 
-<!doctype html>
-    <html lang="en">
-        <head>
-            <title>
-                Mock Placement Quiz
-            </title>
-            <link type="text/css" href="css/bootstrap.css" rel="stylesheet">
-            <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,500italic' rel='stylesheet' type='text/css'>
-            </head>
-            <body style="background-color:silver";>
-             <div class="container-fluid" >
-                 <div class="row">
-                 <div class="col-md-12">
-                     
-                     <div style="background-color:grey;padding:10px 10px 10px 10px;margin-left:-20px;margin-right:-20px;">
-                 <center><h2 style="font-family: 'Alegreya Sans SC', sans-serif;color:white"><b>Mock Placement Quiz</b></h2></center> 
-                     </div>
-                         <br><br> <br><br><br><br>
-                 </div>
-                 </div>
-                 
-                 
-                 <div class="row">
-                     <div class="col-md-4"></div>
-                     <div class="col-md-4">
-                     
-                         <form class="form-horizontal" method="post">
-                          <div class="form-group">
-                            <label  class="col-sm-2 control-label">Username</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" name="id" >
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label  class="col-sm-2 control-label">Password</label>
-                            <div class="col-sm-10">
-                              <input type="password" class="form-control" name="password" placeholder="Password">
-                            </div>
-                          </div>
-                         
-                          <div class="form-group">
-                              <div class="col-md-4"></div>
-                            <div class="col-md-2">
-                         <center>    <button type="submit" name="login" class="btn btn-default">Sign in</button>  </center> 
-                            </div>
-                              <div class=" col-md-2" style="float:left;">
-                         <center>    <button type="submit" name="register" class="btn btn-default">Register</button>  </center> 
-                            </div>
-                              <div class="col-md-5"></div>
-                              
-                              
-                            
-                          </div>
-                        </form>
-                         
-                     </div>
-                     <div class="col-md-4"></div>
-                     
-                     
-                </div>
-                 
-                 
-                    
-            </div>
-            </body>
-        </head>
-    </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Mock Placement Quiz</title>
+  <link type="text/css" href="./css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="./css/login.css">
+</head>
+<body>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="navbar navbar-default">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Abc Limited Placement Test</a>
+				</div>
+				<div class="navbar-collapse collapse navbar-responsive-collapse">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#">Active</a></li>
+						<li><a href="#">Link</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#">Link</a></li>
+					</ul>
+				</div>
+      </div>
+    </div>
+  </div>
 
-    <?php 
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="well bs-component">
+      <!-- Login form -->
+      <form class="form-horizontal" method="post">
+      <fieldset>
+        <legend>Login to the test</legend>
+        <div class="form-group">
+          <label for="loginid" class="col-md-2 control-label">Login ID</label>
+          <div class="col-md-10">
+            <input class="form-control" id="loginid" placeholder="your roll-no" type="text" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password" class="col-md-2 control-label">Password</label>
+          <div class="col-md-10">
+            <input class="form-control" id="password" placeholder="enter your password" type="password" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-10 col-md-offset-2">
+            <button type="submit" class="btn btn-primary">Login</button>
+            &nbsp;&nbsp;&nbsp;<button class="btn btn-default">Register new</button>
+          </div>
+        </div>
+      </fieldset>
+      </form>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
 
-    if (isset($_POST['login'])) {
-        $id = $_POST['id'];
-        $password = $_POST['password'];
-        $password = $password;
+</div>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+</body>
+</html>
 
-        $select_login = "select * from users where id = '$id' and password = '$password'";
-        $result_login = mysql_query($select_login) or die(mysql_error());
-        $res_login = mysql_fetch_assoc($result_login);
+<?php 
 
-        if ($res_login) { 
-            echo "Login Successful";
-            $_SESSION['user-login-id'] = $res_login['id'];
-           // $_SESSION['user-login-name'] = $res_login['name'];
-            header('location:question.php');
-         }
-        else{
-            echo "<script>alert('Incorrect username  or password');</script>";
-        }
-    }
+if (isset($_POST['login'])) {
+  $id = $_POST['id'];
+  $password = $_POST['password'];
 
+  $select_login = "SELECT * FROM users WHERE roll = '$id' AND password = '$password'";
+  $result_login = mysql_query($select_login) or die(mysql_error());
+  $res_login = mysql_fetch_assoc($result_login);
 
+  if ($res_login) { 
+    echo "Login Successful";
+    $_SESSION['user-login-id'] = $res_login['id'];
+    header('location:./question.php');
+  }
+  else{
+    echo "<script>alert('Incorrect username  or password');</script>";
+  }
+}
 ?>
