@@ -5,6 +5,7 @@
  */
 var curr_count = 0
 var time_rem = 0
+var finish = 0
 
 var startTest = function() {
   var q = 'timerem='+time_rem+'&subq='+'0'+'&suba='+'0'+'&finish='+'0'
@@ -15,7 +16,7 @@ var startTest = function() {
       var startbtn = document.getElementById('startbtn')
       var topbar = document.getElementById('topbar')
       var qimg = document.getElementById('qimg')
-
+      displaytimer();
       opp.className -= " hidden"
       startbtn.className += " hidden"
       xmlstr=ajaxobj.responseText
@@ -29,7 +30,7 @@ var startTest = function() {
       document.getElementById('op2').innerHTML = options[1]
       document.getElementById('op3').innerHTML = options[2]
       document.getElementById('op4').innerHTML = options[3]
-      curr_count = root[0].childNodes[0].nodeValue.split('.')[0]
+      curr_count = curr_count + 1
       topbar.innerHTML = "Question " + curr_count
     }
   }
@@ -38,22 +39,25 @@ var startTest = function() {
 }
 
 var nextQues = function() {
-  var finish
-  if (curr_count==totalques) {finish=1};
-
-  var optionsr = document.getElementsByName('options');
-  var opvalue;
+    var optionsr = document.getElementsByName('options');
+  var opvalue=0;
   for(var i = 0; i < optionsr.length; i++){
       if(optionsr[i].checked){
-          opvalue = optionsr[i].value;
+          opvalue = optionsr[i].value
+          optionsr[i].checked = false
       }
   }
-
+  if (curr_count==totalques) {finish=1};
   var q = 'timerem='+time_rem+'&subq='+curr_count+'&suba='+opvalue+'&finish='+finish
   console.log(q)
   var ajaxobj = new XMLHttpRequest()
   ajaxobj.onreadystatechange = function() {
     if(ajaxobj.readyState==4 && ajaxobj.status==200) {
+      if(finish==1) {
+        alert("Test finished")
+        window.location = './finish.php'
+      }
+      else {
       xmlstr=ajaxobj.responseText
       var parser = new DOMParser();
       var xmlres = parser.parseFromString(xmlstr, "application/xml");
@@ -65,11 +69,13 @@ var nextQues = function() {
       document.getElementById('op2').innerHTML = options[1]
       document.getElementById('op3').innerHTML = options[2]
       document.getElementById('op4').innerHTML = options[3]
-      curr_count = root[0].childNodes.nodeValue.split('.')[0]
+      curr_count = curr_count+1
       topbar.innerHTML = "Question " + curr_count
       var nextbtn = document.getElementById('nextbtn')
+      
       if(curr_count == totalques)
         nextbtn.innerHTML = "Finish Test";
+      }
     }
   }
   ajaxobj.open("GET","./question_server.php?"+q,true)
@@ -79,5 +85,19 @@ var nextQues = function() {
 var hide = function() {
   var opp = document.getElementById('optionspane')
   opp.className += " hidden"
-  console.log(totalques)
+}
+
+var seconds=50
+document.getElementById('timer').innerHTML = seconds
+
+function displaytimer(){ 
+    seconds-=1
+    if(seconds<1) {
+      finish=1;
+      nextQues();
+    }
+    percent = seconds/50*100
+    document.getElementById('progbar').style.width = percent+"%"
+    document.getElementById('timer').innerHTML = seconds + " seconds left" 
+    setTimeout("displaytimer()",1000) 
 }

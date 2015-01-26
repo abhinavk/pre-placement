@@ -33,11 +33,11 @@ if (isset($_SESSION['user-login-id'])) {
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Active</a></li>
-            <li><a href="#">Link</a></li>
+            <li class="active"><a href="http://www.juit.ac.in">JUIT</a></li>
+            <li><a href="http://www.juitieee.com">JUIT-IEEE</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Link</a></li>
+            <li><a href="./logout.php">Logout</a></li>
           </ul>
         </div>
       </div>
@@ -49,13 +49,14 @@ if (isset($_SESSION['user-login-id'])) {
     <!-- left sidebar for links and details -->
     <div class="col-md-2">
     <div class="well">
-
+    <div class="progress">
+    <div id="progbar" class="progress-bar" style="width: 100%;"></div>
+    <div id="timer" class="testbtn"></div>
+    <br>
       <div class="list-group">
         <a class="list-group-item" href="./rules.pdf">Rules</a>
         <a class="list-group-item" href="">Sample Questions</a>
         <a class="list-group-item" href="">Contact us</a>
-        <a class="list-group-item" href="">Another link</a>
-        <a class="list-group-item" href="">Another link</a>
       </div>
     </div>
     </div>

@@ -22,22 +22,22 @@ $lastq = $_GET['subq'];
 $lasta = $_GET['suba'];
 $finish = $_GET['finish'];
 $currques = $_SESSION['currques'];
-$currect = $_SESSION['correct'];
+$correct = $_SESSION['correct'];
 
 if($lastq > 0) {
   $lastqq = mysqli_query($db,"SELECT answer FROM questions WHERE id='$currques'");
-  $lastqa = mysqli_fetch_array($totalquesq);
+  $lastqa = mysqli_fetch_array($lastqq);
   if($lastqa[0] == $lasta) {
     $correct = $correct + 1;
   }
 }
 
-if($finish === 1) {
-  mysqli_query($db,"UPDATE users SET score='$correct' AND completed=1 WHERE id='$id'");
+if($finish == 1) {
+  mysqli_query($db,"UPDATE users SET score='$correct', completed=1 WHERE id='$id'");
 }
 
-function unserved($id) {
-  if($id === 0)
+function unserved($idd) {
+  if($idd === 0)
     return(true);
 }
 
@@ -65,6 +65,7 @@ if(mysqli_num_rows($qrun)>0) {
 
 $_SESSION['qtracker'] = $qtracker;
 $_SESSION['currques'] = $selectedq;
+$_SESSION['correct'] = $correct;
 
 include('./incfoot.php');
 ?>
