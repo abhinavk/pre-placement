@@ -1,5 +1,7 @@
 <?php
 session_start();
-mysql_connect("localhost","root","");
-mysql_select_db("juitieee_ppp");
+$db = mysqli_connect("localhost","root","","juitieee_ppp",3306);
+if(!$db){
+	die('Connection failed. Terminating session.');
+}
 ?>

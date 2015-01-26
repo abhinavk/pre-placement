@@ -40,24 +40,24 @@ include('./inchead.php')
     <div class="col-md-4">
       <div class="well bs-component">
       <!-- Login form -->
-      <form class="form-horizontal" method="post">
+      <form id="login" class="form-horizontal" method="post">
       <fieldset>
         <legend>Login to the test</legend>
         <div class="form-group">
           <label for="loginid" class="col-md-2 control-label">Login ID</label>
           <div class="col-md-10">
-            <input class="form-control" id="loginid" placeholder="your roll-no" type="text" required>
+            <input class="form-control" name="loginid" id="loginid" placeholder="your roll-no" type="text" required>
           </div>
         </div>
         <div class="form-group">
           <label for="password" class="col-md-2 control-label">Password</label>
           <div class="col-md-10">
-            <input class="form-control" id="password" placeholder="enter your password" type="password" required>
+            <input class="form-control" id="password" name="password" placeholder="enter your password" type="password" required>
           </div>
         </div>
         <div class="form-group">
           <div class="col-md-10 col-md-offset-2">
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" name="submit" class="btn btn-primary">Login</button>
             &nbsp;&nbsp;&nbsp;<button class="btn btn-default">Register new</button>
           </div>
         </div>
@@ -75,15 +75,15 @@ include('./inchead.php')
 </html>
 
 <?php 
-
-if (isset($_POST['login'])) {
-  $id = $_POST['id'];
+echo "a";
+if (isset($_POST['loginid'])) {
+  $id = $_POST['loginid'];
   $password = $_POST['password'];
 
   $select_login = "SELECT * FROM users WHERE roll = '$id' AND password = '$password'";
-  $result_login = mysql_query($select_login) or die(mysql_error());
-  $res_login = mysql_fetch_assoc($result_login);
-
+  $result_login = mysqli_query($db,$select_login) or die(mysqli_error($db));
+  $res_login = mysqli_fetch_assoc($result_login);
+echo "h";
   if ($res_login) { 
     echo "Login Successful";
     $_SESSION['user-login-id'] = $res_login['id'];
@@ -93,4 +93,6 @@ if (isset($_POST['login'])) {
     echo "<script>alert('Incorrect username  or password');</script>";
   }
 }
+
+include('./incfoot.php');
 ?>
