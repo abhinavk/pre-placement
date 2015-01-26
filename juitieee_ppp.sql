@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2015 at 01:31 PM
+-- Generation Time: Jan 27, 2015 at 12:40 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -50,15 +50,19 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `options` text NOT NULL,
   `answer` int(11) NOT NULL,
   `cat` varchar(4) NOT NULL COMMENT '4-char question category code',
-  `points` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `points` int(11) NOT NULL,
+  `time` int(11) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `questions`
 --
 
-INSERT INTO `questions` (`id`, `quesstr`, `quesimg`, `options`, `answer`, `cat`, `points`) VALUES
-(1, '', '1.jpg', 'one~~two~~three~~four', 1, 'PROG', 25);
+INSERT INTO `questions` (`id`, `quesstr`, `quesimg`, `options`, `answer`, `cat`, `points`, `time`) VALUES
+(1, '', '1.png', 'a=1,b=1~a=2,b=1~a=1,b=2~a=2,b=2', 1, 'PROG', 25, 45),
+(2, '', '2.png', 'Bubble Sort~Insertion Sort~Selection Sort~Quick Sort', 2, 'PROG', 25, 45),
+(3, '', '3.png', 'Complete tree~Full binary tree~Binary search tree~Threaded tree', 2, 'PROG', 25, 25),
+(4, '', '4.png', 'Semaphore~Thrashing~Interleaving~Deadlock', 1, 'PROG', 25, 25);
 
 -- --------------------------------------------------------
 
@@ -77,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `test` (
 --
 
 INSERT INTO `test` (`id`, `key`, `value`) VALUES
-(1, 'is_open', 'no');
+(1, 'is_open', 'yes');
 
 -- --------------------------------------------------------
 
@@ -91,15 +95,18 @@ CREATE TABLE IF NOT EXISTS `users` (
   `firstn` varchar(25) NOT NULL,
   `lastn` varchar(25) NOT NULL,
   `dob` date NOT NULL,
-  `password` varchar(20) NOT NULL
+  `password` varchar(20) NOT NULL,
+  `score` int(11) NOT NULL,
+  `completed` int(11) NOT NULL,
+  `qattempted` int(11) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `roll`, `firstn`, `lastn`, `dob`, `password`) VALUES
-(1, 121225, 'Abhinav', 'Kumar', '1994-04-13', 'panday');
+INSERT INTO `users` (`id`, `roll`, `firstn`, `lastn`, `dob`, `password`, `score`, `completed`, `qattempted`) VALUES
+(1, 121225, 'Abhinav', 'Kumar', '1994-04-13', 'panday', 0, 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -142,7 +149,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `test`
 --
