@@ -24,12 +24,12 @@ header('refresh:4;url=./index.php');
 				</div>
 				<div class="navbar-collapse collapse navbar-responsive-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Active</a></li>
-						<li><a href="#">Link</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">Link</a></li>
-					</ul>
+            <li class="active"><a href="http://www.juit.ac.in">JUIT</a></li>
+            <li><a href="http://www.juitieee.com">JUIT-IEEE</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="./logout.php">Logout</a></li>
+          </ul>
 				</div>
       </div>
     </div>
