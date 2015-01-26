@@ -1,5 +1,6 @@
 <?php 
 include('./inchead.php')
+ 
 ?>
 
 <!DOCTYPE html>
@@ -43,21 +44,21 @@ include('./inchead.php')
       <form class="form-horizontal" method="post">
       <fieldset>
         <legend>Login to the test</legend>
-        <div class="form-group">
+        <div class="form-group" method="post">
           <label for="loginid" class="col-md-2 control-label">Login ID</label>
           <div class="col-md-10">
-            <input class="form-control" id="loginid" placeholder="your roll-no" type="text" required>
+            <input class="form-control" name="roll" placeholder="your roll-no" type="text" required>
           </div>
         </div>
         <div class="form-group">
           <label for="password" class="col-md-2 control-label">Password</label>
           <div class="col-md-10">
-            <input class="form-control" id="password" placeholder="enter your password" type="password" required>
+            <input class="form-control" name="password" placeholder="enter your password" type="password" required>
           </div>
         </div>
         <div class="form-group">
           <div class="col-md-10 col-md-offset-2">
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" name="login" class="btn btn-primary">Sign in</button>
             &nbsp;&nbsp;&nbsp;<button class="btn btn-default">Register new</button>
           </div>
         </div>
@@ -77,10 +78,10 @@ include('./inchead.php')
 <?php 
 
 if (isset($_POST['login'])) {
-  $id = $_POST['id'];
+  $roll = $_POST['roll'];
   $password = $_POST['password'];
 
-  $select_login = "SELECT * FROM users WHERE roll = '$id' AND password = '$password'";
+  $select_login = "SELECT * FROM users WHERE `roll` = '$roll' AND `password` = '$password'";
   $result_login = mysql_query($select_login) or die(mysql_error());
   $res_login = mysql_fetch_assoc($result_login);
 
