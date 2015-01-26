@@ -5,6 +5,8 @@ include('./inchead.php')
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
   <title>Mock Placement Quiz</title>
   <link type="text/css" href="./css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./css/login.css">
