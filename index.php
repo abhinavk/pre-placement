@@ -7,7 +7,7 @@ include('./inchead.php')
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta charset="utf-8">
-  <title>Mock Placement Quiz</title>
+  <title>Placement test</title>
   <link type="text/css" href="./css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./css/login.css">
 </head>
@@ -85,11 +85,15 @@ if (isset($_POST['loginid'])) {
   $select_login = "SELECT * FROM users WHERE roll = '$id' AND password = '$password'";
   $result_login = mysqli_query($db,$select_login) or die(mysqli_error($db));
   $res_login = mysqli_fetch_assoc($result_login);
-echo "h";
   if ($res_login) { 
-    echo "Login Successful";
     $_SESSION['user-login-id'] = $res_login['id'];
+    if($res_login['completed']==1) {
+      header('location:./finish.php');
+      exit();
+    } else {
     header('location:./question.php');
+    exit();
+    }
   }
   else{
     echo "<script>alert('Incorrect username  or password');</script>";

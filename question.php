@@ -10,7 +10,7 @@ if (isset($_SESSION['user-login-id'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Placement Mock Test</title>
+  <title>Placement Test</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta charset="utf-8">
   <link type="text/css" href="./css/bootstrap.min.css" rel="stylesheet">
@@ -52,6 +52,7 @@ if (isset($_SESSION['user-login-id'])) {
     <div class="progress">
     <div id="progbar" class="progress-bar" style="width: 100%;"></div>
     <div id="timer" class="testbtn"></div>
+    </div>
     <br>
       <div class="list-group">
         <a class="list-group-item" href="./rules.pdf">Rules</a>
