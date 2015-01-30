@@ -59,8 +59,10 @@ include('./inchead.php')
         </div>
         <div class="form-group">
           <div class="col-md-10 col-md-offset-2">
-            <button type="submit" name="submit" class="btn btn-primary">Login</button>
-            &nbsp;&nbsp;&nbsp;<button class="btn btn-default">Register new</button>
+            <button type="submit" name="login_bt" class="btn btn-primary">Login</button>
+            &nbsp;&nbsp;&nbsp;<input type="submit" class="btn btn-default" name="register_bt" value="Register New" />
+            &nbsp;&nbsp;&nbsp; <input type="submit" class="btn btn-success" name="admin_bt" value="Admin Panel" />
+
           </div>
         </div>
       </fieldset>
@@ -78,7 +80,7 @@ include('./inchead.php')
 
 <?php 
 echo "a";
-if (isset($_POST['loginid'])) {
+if (isset($_POST['loginid']) && isset($_POST['login_bt'])) {
   $id = $_POST['loginid'];
   $password = $_POST['password'];
 
@@ -102,3 +104,12 @@ if (isset($_POST['loginid'])) {
 
 include('./incfoot.php');
 ?>
+
+<!--Register Button link-->
+<?php
+if(isset($_POST['register_bt'])){
+   header('location:./register.php');
+}
+
+?>
+<!--end-->
