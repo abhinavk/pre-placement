@@ -1,7 +1,6 @@
 ﻿<?php
 include('./inchead.php');
 ?>
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -38,7 +37,7 @@ include('./inchead.php');
                         <strong>   Register Yourself </strong>  
                             </div>
                             <div class="panel-body">
-                                <form role="form">
+                                <form role="form" method="POST" action="register.php">
 <br/>
                                         <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-circle-o-notch"  ></i></span>
@@ -46,7 +45,7 @@ include('./inchead.php');
                                         </div>
                                      <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-tag"  ></i></span>
-                                            <input type="text" name="register_id" class="form-control" placeholder="Your Roll No" />
+                                            <input type="text" name="register_roll" class="form-control" placeholder="Your Roll No" />
                                         </div>
                                          <div class="form-group input-group">
                                             <span class="input-group-addon">@</span>
@@ -56,12 +55,16 @@ include('./inchead.php');
                                             <span class="input-group-addon"><i class="fa fa-briefcase"  ></i></span>
                                             <input type="text" name="register_sem" class="form-control" placeholder="Your Semester" />
                                         </div>
+                                         <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" name="register_dob" class="form-control" placeholder="Date Of Birth (YYYY-MM-DD)" />
+                                        </div>
                                      <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>
                                             <input type="password" name="register_password" class="form-control" placeholder="Password" />
                                         </div>
                                      
-                                     <a href="#" class="btn btn-success " name="register_button">Register Me</a>
+                                     <input type="submit" class="btn btn-success " name="register_button" value="Register Me" />
                                     <hr />
                                     Already Registered ?  <a href="index.php" >Login here</a>
                                     </form>
@@ -83,3 +86,52 @@ include('./inchead.php');
    
 </body>
 </html>
+
+<!--REGiSTER PHP-->
+<?php
+if (isset($_POST['register_roll']) && isset($_POST['register_name']) && isset($_POST['register_dob']) && isset($_POST['register_sem']) && isset($_POST['register_email']) && isset($_POST['register_password'])) {
+  $register_roll=$_POST['register_roll'];
+  $register_name=$_POST['register_name'];
+  $parts = explode(" ", $register_name);
+  $lastname = array_pop($parts);
+  $firstname = implode(" ", $parts);
+
+  $register_email=$_POST['register_email'];
+  $register_dob=$_POST['register_dob'];
+  $register_password=$_POST['register_password'];
+  $register_semester=$_POST['register_sem'];
+   
+   if(!empty($register_roll) && !empty($register_name) && !empty($register_dob) && !empty($register_email) && !empty($register_password) && !empty($register_semester)){
+      $query_check_roll=mysqli_query($db,"SELECT roll FROM users WHERE roll='$register_roll';");
+     if(mysqli_num_rows($query_check_roll)==0){
+      $query2=mysqli_query($db,"INSERT INTO users VALUES('','$register_roll','$firstname','$lastname','$register_dob','$register_password','0','0','0');");
+      if($query2){
+         echo '<script type="text/javascript">'.
+        'alert("Thanks for Registering !");'.
+        '</script>';
+        header('location: index.php');
+
+      }else{
+        echo '<script type="text/javascript">'.
+        'alert("Unable to register!");'.
+        '</script>';
+      }
+
+     }else{
+        echo '<script type="text/javascript">'.
+        'alert("User already registered!");'.
+        '</script>';
+     }
+
+   }else{
+    echo '<script type="text/javascript">'.
+        'alert("Fill all fields !");'.
+        '</script>';
+   }
+
+}else{
+   
+}
+?>
+
+<!--END REGISTER-->
