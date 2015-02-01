@@ -1,5 +1,6 @@
 ﻿<?php
 include('./inchead.php');
+ob_start();
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -20,6 +21,17 @@ include('./inchead.php');
     <link href="assets/css/style.css" rel="stylesheet" />    
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <style type="text/css">
+#message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+#inner-message {
+    margin: 0 auto;
+}
+    </style>
 
 </head>
 <body>
@@ -41,27 +53,27 @@ include('./inchead.php');
 <br/>
                                         <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-circle-o-notch"  ></i></span>
-                                            <input type="text" name="register_name" class="form-control" placeholder="Your Name" />
+                                            <input type="text" name="register_name" class="form-control" placeholder="Your Name" required/>
                                         </div>
                                      <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-tag"  ></i></span>
-                                            <input type="text" name="register_roll" class="form-control" placeholder="Your Roll No" />
+                                            <input type="text" name="register_roll" class="form-control" placeholder="Your Roll No" required/>
                                         </div>
                                          <div class="form-group input-group">
                                             <span class="input-group-addon">@</span>
-                                            <input type="text" name="register_email" class="form-control" placeholder="Your Email" />
+                                            <input type="text" name="register_email" class="form-control" placeholder="Your Email" required/>
                                         </div>
                                       <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-briefcase"  ></i></span>
-                                            <input type="text" name="register_sem" class="form-control" placeholder="Your Semester" />
+                                            <input type="text" name="register_sem" class="form-control" placeholder="Your Semester" required/>
                                         </div>
                                          <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                            <input type="text" name="register_dob" class="form-control" placeholder="Date Of Birth (YYYY-MM-DD)" />
+                                            <input type="text" name="register_dob" class="form-control" placeholder="Date Of Birth (YYYY-MM-DD)" required/>
                                         </div>
                                      <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>
-                                            <input type="password" name="register_password" class="form-control" placeholder="Password" />
+                                            <input type="password" name="register_password" class="form-control" placeholder="Password" required/>
                                         </div>
                                      
                                      <input type="submit" class="btn btn-success " name="register_button" value="Register Me" />
@@ -106,10 +118,11 @@ if (isset($_POST['register_roll']) && isset($_POST['register_name']) && isset($_
      if(mysqli_num_rows($query_check_roll)==0){
       $query2=mysqli_query($db,"INSERT INTO users VALUES('','$register_roll','$firstname','$lastname','$register_dob','$register_password','0','0','0');");
       if($query2){
-         echo '<script type="text/javascript">'.
-        'alert("Thanks for Registering !");'.
-        '</script>';
-        header('location: index.php');
+          echo '<div class="alert alert-success" id="message">'.
+    '<a href="index.php" class="close" data-dismiss="alert" id="inner-message">&times;</a>'.'
+    <strong>Success!</strong>'.'Thanks for Registering.'.
+'</div>';
+        header('location:../');
 
       }else{
         echo '<script type="text/javascript">'.
@@ -118,15 +131,16 @@ if (isset($_POST['register_roll']) && isset($_POST['register_name']) && isset($_
       }
 
      }else{
-        echo '<script type="text/javascript">'.
-        'alert("User already registered!");'.
-        '</script>';
+        echo '<div class="alert alert-warning" id="message">'.
+    '<a href="#" class="close" data-dismiss="alert" id="inner-message">&times;</a>'.'
+    <strong>Warning!</strong>'.' User already registered.'.
+'</div>';
      }
 
    }else{
-    echo '<script type="text/javascript">'.
+    /*echo '<script type="text/javascript">'.
         'alert("Fill all fields !");'.
-        '</script>';
+        '</script>';*/
    }
 
 }else{

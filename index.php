@@ -98,7 +98,10 @@ if (isset($_POST['loginid']) && isset($_POST['login_bt'])) {
     }
   }
   else{
-    echo "<script>alert('Incorrect username  or password');</script>";
+    echo '<div class="alert alert-warning" id="message">'.
+    '<a href="#" class="close" data-dismiss="alert" id="inner-message">&times;</a>'.'
+    <strong>Warning!</strong>'.' Incorrect username  or password.'.
+'</div>';
   }
 }
 
@@ -109,6 +112,9 @@ include('./incfoot.php');
 <?php
 if(isset($_POST['register_bt'])){
    header('location:./register.php');
+}
+if(isset($_POST['admin_bt'])){
+   header('location:./admin/index.php');
 }
 
 ?>
