@@ -102,16 +102,16 @@ ob_start();
 <!--REGiSTER PHP-->
 <?php
 if (isset($_POST['register_roll']) && isset($_POST['register_name']) && isset($_POST['register_dob']) && isset($_POST['register_sem']) && isset($_POST['register_email']) && isset($_POST['register_password'])) {
-  $register_roll=$_POST['register_roll'];
-  $register_name=$_POST['register_name'];
+  $register_roll=mysql_real_escape_string($_POST['register_roll']);
+  $register_name=mysql_real_escape_string($_POST['register_name']);
   $parts = explode(" ", $register_name);
   $lastname = array_pop($parts);
   $firstname = implode(" ", $parts);
 
-  $register_email=$_POST['register_email'];
-  $register_dob=$_POST['register_dob'];
-  $register_password=$_POST['register_password'];
-  $register_semester=$_POST['register_sem'];
+  $register_email=mysql_real_escape_string($_POST['register_email']);
+  $register_dob=mysql_real_escape_string($_POST['register_dob']);
+  $register_password=mysql_real_escape_string($_POST['register_password']);
+  $register_semester=mysql_real_escape_string($_POST['register_sem']);
    
    if(!empty($register_roll) && !empty($register_name) && !empty($register_dob) && !empty($register_email) && !empty($register_password) && !empty($register_semester)){
       $query_check_roll=mysqli_query($db,"SELECT roll FROM users WHERE roll='$register_roll';");

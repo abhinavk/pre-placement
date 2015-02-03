@@ -89,8 +89,8 @@ include('../inchead.php')
 
 <?php 
 if (isset($_POST['admin_id']) && isset($_POST['admin_password'])) {
-  $email = $_POST['admin_id'];
-  $password = $_POST['admin_password'];
+  $email = mysql_real_escape_string($_POST['admin_id']);
+  $password = mysql_real_escape_string($_POST['admin_password']);
   $select_login = mysqli_query($db,"SELECT * FROM admins WHERE email = '$email' AND password = '$password';");
   $res_login = mysqli_fetch_assoc($select_login);
   if ($res_login) { 

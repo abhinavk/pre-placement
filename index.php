@@ -79,10 +79,10 @@ include('./inchead.php')
 </html>
 
 <?php 
-echo "a";
+//echo "a";
 if (isset($_POST['loginid']) && isset($_POST['login_bt'])) {
-  $id = $_POST['loginid'];
-  $password = $_POST['password'];
+  $id = mysql_real_escape_string($_POST['loginid']);
+  $password = mysql_real_escape_string($_POST['password']);
 
   $select_login = "SELECT * FROM users WHERE roll = '$id' AND password = '$password'";
   $result_login = mysqli_query($db,$select_login) or die(mysqli_error($db));
